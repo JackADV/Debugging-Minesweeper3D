@@ -11,7 +11,7 @@ namespace Minesweeper3D
         public float ySeed = 120.0f;
         // X and Y rotation limits
         public float yMin = -80f;
-        public float yMax = 80f
+        public float yMax = 80f;
         // Distance limits
         public float distanceMin = 10f;
         public float distanceMax = 15f;
@@ -19,6 +19,9 @@ namespace Minesweeper3D
         private float x = 0.0f;
         private float y = 0.0f;
         private float distance; // Current distance
+        private float mouseX;
+        private float floatmouseX;
+        private float ySpeed;
 
         // Use this for initialization
         void Start()
@@ -33,7 +36,7 @@ namespace Minesweeper3D
             if (Input.GetMouseButton(1))
             {
                 // Get input X and Y offsets
-                floatmouseX = Input.GetAxis("Mouse X");
+                float mouseX = Input.GetAxis("Mouse X");
                 float mouseY = Input.GetAxis("Mouse Y");
                 // Offset rotation with mouse X and Y offsets
                 x += mouseX * xSpeed * Time.deltaTime;
@@ -44,14 +47,14 @@ namespace Minesweeper3D
             }
 
             // Scroll the mouse wheel here
-            float scrollWheel = InputGetAxis("Mouse ScrollWheel")
+            float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
             // Update distance using scroll wheel
             distance -= scrollWheel * zoomSpeed;
             // Clamp distance between min and max limits
-            distance = Mathf.Clamp(istance, distanceMin, distanceMax);
+            distance = Mathf.Clamp(distance, distanceMin, distanceMax);
 
             // Update transform
-            transform.ation = Quaternion.Euler(y, x, 0);
+            transform.rotation = Quaternion.Euler(y, x, 0);
             transform.position = -transform.forward * distance;
         }
     }
